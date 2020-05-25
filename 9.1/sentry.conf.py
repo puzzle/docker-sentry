@@ -318,3 +318,12 @@ if 'GITHUB_APP_ID' in os.environ:
 if 'BITBUCKET_CONSUMER_KEY' in os.environ:
     BITBUCKET_CONSUMER_KEY = env('BITBUCKET_CONSUMER_KEY')
     BITBUCKET_CONSUMER_SECRET = env('BITBUCKET_CONSUMER_SECRET')
+
+SENTRY_OPTIONS['filestore.backend'] = env('SENTRY_FILESTORE_BACKEND')
+SENTRY_OPTIONS['filestore.options'] = {
+  'location': env('SENTRY_FILESTORE_DIR'),
+  'endpoint_url': env('SENTRY_FILE_HOST'),
+  'bucket_name': env('SENTRY_FILE_BUCKET'),
+  'access_key': env('SENTRY_FILE_ACCESS'),
+  'secret_key': env('SENTRY_FILE_SECRET')
+}

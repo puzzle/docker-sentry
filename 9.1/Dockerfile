@@ -1,4 +1,4 @@
-FROM python:2.7.16-slim-stretch
+FROM python:2.7-slim-stretch
 
 # add our user and group first to make sure their IDs get assigned consistently
 RUN groupadd -r sentry && useradd -r -m -g sentry sentry
@@ -91,6 +91,7 @@ RUN set -x \
         dirmngr \
         gnupg \
         wget \
+        patch \
     " \
     && apt-get update && apt-get install -y --no-install-recommends $buildDeps && rm -rf /var/lib/apt/lists/* \
     && mkdir -p /usr/src/sentry \
@@ -114,6 +115,11 @@ RUN set -x \
     && pip install \
         /usr/src/sentry/sentry-${SENTRY_VERSION}-py27-none-any.whl \
         /usr/src/sentry/sentry_plugins-${SENTRY_VERSION}-py2.py3-none-any.whl \
+    && cd /usr/local/lib/python2.7/site-packages \
+    && wget -qO- https://patch-diff.githubusercontent.com/raw/puzzle/sentry/pull/1.patch | \
+        patch -p2 \
+    && wget -qO- https://patch-diff.githubusercontent.com/raw/puzzle/sentry-plugins/pull/1.patch | \
+        patch -p2 \
     && sentry --help \
     && sentry plugins list \
     && rm -r "$GNUPGHOME" /usr/src/sentry \

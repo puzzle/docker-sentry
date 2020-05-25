@@ -327,3 +327,9 @@ SENTRY_OPTIONS['filestore.options'] = {
   'access_key': env('SENTRY_FILE_ACCESS'),
   'secret_key': env('SENTRY_FILE_SECRET')
 }
+
+# OpenIDconnect
+OIDC_CLIENT_ID = env('SENTRY_OIDC_CLIENT_ID')
+OIDC_CLIENT_SECRET = env('SENTRY_OIDC_CLIENT_SECRET')
+OIDC_SCOPE = env('SENTRY_OIDC_SCOPE') or 'openid email'
+OIDC_DOMAIN = env('SENTRY_OIDC_DOMAIN')

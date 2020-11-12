@@ -121,6 +121,7 @@ RUN set -x \
         patch -p2 \
     && wget -qO- https://patch-diff.githubusercontent.com/raw/puzzle/sentry-plugins/pull/1.patch | \
         patch -p2 \
+    && echo 'This report is only available in HTML format!' >sentry/templates/sentry/emails/reports/body.txt \
     && sentry --help \
     && sentry plugins list \
     && rm -r "$GNUPGHOME" /usr/src/sentry \

@@ -116,6 +116,7 @@ RUN set -x \
         /usr/src/sentry/sentry-${SENTRY_VERSION}-py27-none-any.whl \
         /usr/src/sentry/sentry_plugins-${SENTRY_VERSION}-py2.py3-none-any.whl \
         'sentry-auth-oidc<3.0.0' \
+    && pip install --upgrade requests \
     && cd /usr/local/lib/python2.7/site-packages \
     && wget -qO- https://patch-diff.githubusercontent.com/raw/puzzle/sentry/pull/1.patch | \
         patch -p2 \
